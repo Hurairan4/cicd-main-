@@ -20,9 +20,4 @@ jobs:
       - name: Create Pull Request
         env:
           GH_TOKEN: ${{ secrets.TOKEN }}
-        run: |
-          gh pr create \
-            --base main \
-            --head dev \
-            --title "Auto Pull Request: dev to main" \
-            --body "This PR was created automatically by GitHub Actions."
+        run: gh pr create --base main --head dev --title "Auto Pull Request from dev to main" --body "This PR was created automatically by GitHub Actions."
