@@ -1,1 +1,78 @@
+name: Create Pull Request and Notifyown
 
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  auto-pull-request:
+    name: PullRequestAction
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Create Pull Request
+        id: create_pr
+        uses: diillson/auto-pull-request@v1.0.1
+        with:
+          source_branch: ""                                 # If blank, default: triggered branch
+          destination_branch: "main"                        # If blank, default: master
+          pr_title: "Pulling ${{ github.ref }} into main"   # Title of pull request
+          pr_body: |                                        # Full markdown support, requires pr_title to be set
+            :crown: An automated PR
+            This pull request has been created automatically by the workflow.
+            Please review the changes and merge if acceptable.
+          pr_assignee: "Hurairan4"                       # Your GitHub username
+          pr_label: "auto-pr"                               # Comma-separated list (no spaces)
+          pr_allow_empty: true                              # Creates pull request even if there are no changes
+          github_token: ${{ secrets.TOKEN }}
+
+      - name: Get Repository Info
+        id: repo_info
+        run: |
+          echo "::set-output name=repo::$(echo $GITHUB_REPOSITORY)"
+          echo "::set-output name=pr_number::$(jq -r '.number' /tmp/pull-request.json)"
+
+      - name: Send Email Notification (Gmail SMTP)
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          secure: false
+          username: huraira124r@gmail.com
+          password: njxt gbuu yrvl kcob
+          subject: "Approval required for Pull Request #${{ steps.create_pr.outputs.pull-request-number }}"
+          body: |
+            A new Pull Request has been created.
+
+            Repository: ${{ steps.repo_info.outputs.repo }}
+            Branch: ${{ github.ref_name }}
+            PR Number: #${{ steps.create_pr.outputs.pull-request-number }}
+
+            Review & approve here:
+              https://github.com/${{ steps.repo_info.outputs.repo }}/pull/${{ steps.repo_info.outputs.pr_number }}
+          to: huraira124r@gmail.com
+          from: huraira124r@gmail.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+            https://github.com/${{ steps.repo_info.outputs.repo }}/pull/${{ steps.repo_info.outputs.pr_number }}
+          to: 
+          from: 
