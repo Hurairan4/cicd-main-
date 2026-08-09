@@ -1,0 +1,66 @@
+name: Deploy Business Logo Design
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up SSH Agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.CICD_SSH_KEY }}
+
+      - name: Deploy Application
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@ec2-54-166-55-25.compute-1.amazonaws.com << 'EOF'
+            set -e
+
+            # Go to deployment directory
+            cd /var/www/html/businesslogodesign-dockerkube
+
+            git config --global --add safe.directory /var/www/html/businesslogodesign-dockerkube
+
+            # Save last successful commit
+            LAST_COMMIT=$(git rev-parse HEAD)
+            echo $LAST_COMMIT > .last_commit
+
+            # Pull latest code
+            git checkout main
+            git pull origin main || {
+              echo "Deployment failed, rolling back..."
+              git reset --hard $(cat .last_commit)
+              exit 1
+            }
+
+            # Set ownership for Apache
+            sudo chown -R www-data:www-data /var/www/html/businesslogodesign-dockerkube
+
+            # Optional: restart Apache
+            # sudo systemctl restart apache2
+          EOF
+
+      - name: Send Email Notification (Gmail SMTP)
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          secure: false
+          username: huraira124r@gmail.com
+          password: njxt gbuu yrvl kcob
+          subject: "Deployment Notification - Business Logo Design"
+          body: |
+            The deployment to the server has been successfully completed.
+
+            Repository: ${{ github.repository }}
+            Branch: ${{ github.ref }}
+            Site URL: https://cicd.ressenza.pk
+          to: huraira124r@gmail.com
+          from: huraira124r@gmail.com
