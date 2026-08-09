@@ -55,24 +55,3 @@ jobs:
               https://github.com/${{ steps.repo_info.outputs.repo }}/pull/${{ steps.repo_info.outputs.pr_number }}
           to: huraira124r@gmail.com
           from: huraira124r@gmail.com
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-            https://github.com/${{ steps.repo_info.outputs.repo }}/pull/${{ steps.repo_info.outputs.pr_number }}
-          to: 
-          from: 
