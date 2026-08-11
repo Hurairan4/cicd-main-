@@ -364,7 +364,7 @@ The following screenshots document the implementation and successful testing of 
 
 The GitHub repository contains the application source code and GitHub Actions workflow files.
 
-![GitHub Repository](images/github-repository.png)
+![GitHub Repository](images/github-repository.PNG)
 
 ---
 
@@ -374,19 +374,19 @@ The GitHub repository contains the application source code and GitHub Actions wo
 
 The GitHub Actions Pull Request workflow successfully executes after code is pushed to a non-main branch.
 
-![PR Workflow Success](images/pr-workflow-success.png)
+![PR Workflow Success](images/pr-workflow-success.PNG)
 
 ### PR Workflow Checks
 
 The individual workflow steps are shown completing successfully.
 
-![PR Workflow Checks](images/pr-workflow-checks.png)
+![PR Workflow Checks](images/pr-workflow-checks.PNG)
 
 ### Pull Request Approval Email
 
 The automated email notification requesting Pull Request review.
 
-![PR Approval Email](images/pr-approval-email.png)
+![PR Approval Email](images/pr-approval-email.PNG)
 
 ---
 
@@ -396,19 +396,19 @@ The automated email notification requesting Pull Request review.
 
 The deployment workflow successfully runs after changes are merged into `main`.
 
-![Deployment Workflow Success](images/deployment-workflow-success.png)
+![Deployment Workflow Success](images/deployment-workflow-success.PNG)
 
 ### Deployment Workflow Checks
 
 The individual deployment steps are shown completing successfully.
 
-![Deployment Workflow Checks](images/deployment-workflow-checks.png)
+![Deployment Workflow Checks](images/deployment-workflow-checks.PNG)
 
 ### Deployment Notification
 
 The automated email notification confirms that the deployment has been completed.
 
-![Deployment Notification](images/deployment-notification-email.png)
+![Deployment Notification](images/deployment-notification-email.PNG)
 
 ---
 
@@ -416,7 +416,7 @@ The automated email notification confirms that the deployment has been completed
 
 The AWS EC2 instance used as the deployment server.
 
-![AWS EC2 Instance](images/aws-ec2-instance.png)
+![AWS EC2 Instance](images/aws-ec2-instance.PNG)
 
 ---
 
@@ -424,7 +424,7 @@ The AWS EC2 instance used as the deployment server.
 
 GitHub Actions showing the successful execution of both the Pull Request and deployment workflows.
 
-![Pipelines Success](images/pipelines-success.png)
+![Pipelines Success](images/pipelines-success.PNG)
 
 ---
 
@@ -432,7 +432,7 @@ GitHub Actions showing the successful execution of both the Pull Request and dep
 
 During deployment testing, the EC2 repository was synchronized with the GitHub repository using `git fetch origin`.
 
-![Git Fetch Success](images/git-fetch-success.png)
+![Git Fetch Success](images/git-fetch-success.PNG)
 
 This was part of troubleshooting a Git branch divergence issue encountered during the initial deployment test.
 
@@ -442,7 +442,7 @@ This was part of troubleshooting a Git branch divergence issue encountered durin
 
 The final result of the CI/CD pipeline — the PHP application successfully deployed and accessible through the configured domain.
 
-![Live Website](images/live-website.png)
+![Live Website](images/live-website.PNG)
 
 ---
 
